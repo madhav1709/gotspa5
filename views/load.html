@@ -1,0 +1,29 @@
+
+<div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-4 col-md-4 col-xs-8">
+              <a  class="btn btn-xl btn-primary btn-block" ng-click="main.ShowBooks()"><span class="fa  fa-book"></span>  Books</a> <!-- If you press the button twice it will hide the data -->
+            </div>
+            <div class="col-lg-4 col-md-4 col-xs-8">
+              <a  class="btn btn-xl btn-info btn-block"" ng-click="main.ShowHouses()"><span class="fa fa-flag"></span>  Houses</a>
+            </div>    <!-- If you press the button twice it will hide the data -->
+            <div class="col-lg-4 col-md-4 col-xs-8">
+              <a  class="btn btn-xl btn-danger btn-block" ng-click="main.ShowCharacters()"><span class="fa fa-street-view"></span>  Characters</a>
+            </div>  <!-- If you press the button twice it will hide the data -->
+            <p style="color:blue;text-align:center;font-size: 40px;">IF YOU WANT TO REACH THE TOP OF THE PAGE PRESS "GOT" ON THE NAV-BAR</p>
+          </div>
+        
+
+        
+        <div  class="col-lg-12  col-md-8 text-center" ng-show="main.showbooks">
+          <my-books></my-books>
+        </div>
+       
+        <div class="col-lg-12  col-md-8 text-center" ng-show="main.showcharacters">
+          <my-chars></my-chars>
+        </div>
+      <div  class="col-lg-12  col-md-8 text-center" ng-show="main.showhouses">
+          <my-houses></my-houses>
+        </div>
+
+      </div>

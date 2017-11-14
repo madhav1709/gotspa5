@@ -1,0 +1,62 @@
+<h1>List of Houses</h1>
+
+<input style="color:black;text-align: center;" type="text" placeholder="Enter house name" ng-model="name3"></p>
+
+<p style="color:black;">To Sort click on House Name heading(ascending and descending). To view more details about the house click on the <b><i>house</i></b> of your favourite book....(it opens a modal which contains the details of a house).</p>
+<p> <a ng-click="Type = 'name'; Desc = !Desc">House Name
+		<span ng-if="!Desc" class="fa fa-angle-double-up"></span>
+    <span ng-if="Desc" class="fa fa-angle-double-down"></span>
+    </a>
+    <a>&nbsp;&nbsp;WORDS</a>
+    <a>&nbsp;&nbsp;SEATS</a>
+    <a>&nbsp;&nbsp;REGION</a>
+  </p>
+
+<div ng-repeat="house in main.houses | orderBy:Type:Desc | filter : {name : name3} ">
+    <!-- item -->
+    <div class="col-xs-4 text-center">
+        <div class="panel panel-info panel-p">
+            <div class="panel-heading">
+            </div>
+            <div class="panel-body text-center">
+                <p ng-click="myHouseFunction(house.url)"  data-toggle="modal" data-target="#Modal3"><strong>{{house.name}}</strong></p>
+            </div>
+            <ul class="list-group text-center">
+                <li class="list-group-item"><strong>WORDS:</strong> {{house.words}}<span ng-show = "{{house.words.length < 1 }}" >No Words Available</span></li>
+                <li class="list-group-item"><strong>SEATS:</strong> {{house.seats[0]}}<span ng-show = "{{house.seats[0].length < 1 }}" >NA</span></li>
+                <li class="list-group-item"><strong>REGION:</strong> {{house.region}}<span ng-show = "{{house.region.length < 1 }}" >No Region Available</span></li>
+                
+            </ul>
+        </div>
+    </div>
+    <!-- /item -->
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="Modal3Title" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">House Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p style="color:red"><strong>If a particular field has no details it means no info available..</strong></p>
+          <p style="color:black"><strong>HouseName:</strong> {{HouseName}}</p>
+          <p style="color:black"><strong>Words:</strong> {{Words}}</p>
+          <p style="color:black"><strong>Seats:</strong> {{Seats}}</p>
+          <p style="color:black"><strong>Region:</strong> {{Region}}</p>
+          <p style="color:black"><strong>Founded: </strong>{{founded}}</p>
+          <p style="color:black"><strong>Coat Of Arms:</strong> {{CoatofArms}}</p>
+          <p style="color:black"><strong>Hiers:</strong> {{heirs}}</p>
+      </div>
+       <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<h1 style="color:black; text-align: center;">List Of Available Characters. </h1>
+
+<input style="color:black;text-align:center;" type="text" placeholder="Enter Character Name" ng-model="name1">
+<input style="color:black;text-align:center;" type="text"  placeholder="Enter actor/actress name" ng-model="playedby">
+<input style="color:black;text-align:center;" type="text"  placeholder="Enter date/year in AC" ng-model="born1">
+
+<p style="color:black;">To sort click on respective table headings(ascending and descending). To view more details about a character click on the <b><i>name</i></b> of your favourite character Ex:-<b>JON SNOW,TYRION LANISTER</b>....(it opens a modal which contains the details of a Character)  </p>
+
+<table class="table table-bordered table-hover table-responsive">
+    <tr>
+        <th><a ng-click="Type = 'name'; Desc = !Desc">Name(Gender)
+         <span ng-if="!Desc" class="fa fa-angle-double-up"></span> <!-- ascending(alphabetically) -->
+         <span ng-if="Desc" class="fa fa-angle-double-down"></span> <!-- descending -->
+        </th>
+        <th><a  ng-click="Type = 'playedBy'; Desc = !Desc">Played By
+         <span ng-if="!Desc" class="fa fa-angle-double-up"></span> <!-- ascending(alphabetically) -->
+         <span ng-if="Desc" class="fa fa-angle-double-down"></span> <!-- descending -->
+        </th>
+        
+        <th>Born(Year)</th>
+    </tr>
+    <tr ng-repeat="char in main.characters | orderBy:Type:Desc | filter : {name : name1} | filter : {playedBy:playedby} | filter : {born:born1}">
+    <td ng-click="myCharsFunction(char.url)"  data-toggle="modal" data-target="#modal2">{{char.name}}({{char.gender}})<span ng-show = "{{char.name.length < 1 }}" >"UNKNOWN"</span>
+        </td>
+        <td>{{char.playedBy[0]}}<span ng-show = "{{char.playedBy[0].length < 1 }}" >"fictional character."</span></td>
+        <td>{{char.born}}<span ng-show = "{{char.born.length < 1 }}" >Birth date not yet available</span></td>
+    </tr>
+</table>
+
+
+<!-- Modal(modern approach for viewing additional info.) -->
+<div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="modal2Title" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Character Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p style="color:red"><strong>If a particular field has no details it means no info available..</strong></p>    
+          <p style="color:black"><b>Name:</b> {{name}}</p>
+          <p style="color:red"><b>Gender:</b>{{gender}}</p>
+          <p style="color:red"><b>Title:</b> {{title}}</p>
+          <p style="color:black"><b>Aliases:</b> {{aliases}}</p>
+          <p style="color:red"><b>Father:</b> {{father}}</p>
+          <p style="color:black"><b>Mother:</b> {{mother}}</p>
+          <p style="color:red"><b>Spouses:</b> {{spouses}}</p>
+          <p style="color:red"><b>URL:<b> {{url}}</p>
+       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>

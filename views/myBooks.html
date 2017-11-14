@@ -1,0 +1,77 @@
+
+<h1>LIST OF AVAILABLE BOOKS.</h1>
+ <!-- Filters -->
+<input style="color:black;text-align:center;" type="text" placeholder="Enter Book Name" ng-model="name2">
+<input style="color:black;text-align:center;" type="text" placeholder="Enter Author Name" ng-model="author">
+<input style="color:black;text-align:center;" type="text" placeholder="Enter Publisher Name" ng-model="publisher">
+<input style="color:black;text-align:center;" type="text" placeholder="Enter Release Date" ng-model="releaseDate">
+
+
+<p style="color:black;">To Sort click on respective table headings(ascending and descending). To view more details about the book click on the <b><i>author</i></b> of your favourite book....(it opens a modal which contains the details of a book) </p>
+<div class="col-lg-12  col-md-8 text-center">
+   <table class="table table-bordered table-responsive table-striped">
+    <tr>
+       <th><a ng-click="Type = 'name'; Desc = !Desc">Name        <!-- book name -->
+       <span ng-if="!Desc" class="fa fa-angle-double-up"></span> <!-- ascending -->
+       <span ng-if="Desc" class="fa fa-angle-double-down"></span> <!-- descending -->
+       </th>
+	   
+	     <th><a  ng-click="Type = 'authors'; Desc = !Desc">Authors
+       <span ng-if="!Desc" class="fa fa-angle-double-up"></span> <!-- ascending -->
+       <span ng-if="Desc" class="fa fa-angle-double-down"></span> <!-- descending -->
+       </th>
+	   
+	     <th><a  ng-click="Type = 'released'; Desc = !Desc">Date of Release
+       <span ng-if="!Desc" class="fa fa-angle-double-up"></span> <!-- ascending -->
+       <span ng-if="Desc" class="fa fa-angle-double-down"></span> <!-- descending -->
+       </th>
+       
+       <th><a  ng-click="Type = 'publisher'; Desc = !Desc">Publishers
+       <span ng-if="!Desc" class="fa fa-angle-double-up"></span> <!-- ascending -->
+       <span ng-if="Desc" class="fa fa-angle-double-down"></span> <!-- descending -->
+       </th>
+      
+       <th>Book Cover</th>
+	</tr>
+	<tr ng-repeat="book in main.BooksList | orderBy:Type:Desc | filter : {name : name2}  | filter : {authors : author} | filter : {released : releaseDate} | filter : {publisher : publisher}">
+	    <td>{{book.name}}</td>
+		<td ng-click="BookDetail(book.url)"  data-toggle="modal" data-target="#Modal1">{{book.authors[0]}}<span ng-show="book.authors.length > 1">{{book.authors}}</span></td>
+		<td>{{book.released}}
+		</a></td>
+		<td>{{book.publisher}}
+		</td>
+		<td><img ng-src = "img/{{book.isbn}}.jpg" alt="book-cover" heigth="50" width="42" class="img-responsive"> 
+		</td>
+	</tr>
+</table>
+</div>
+
+<!-- Modal(The Modal  is a dialog box/popup window that is displayed on top of the current page) -->
+
+<div id="Modal1" class="modal fade">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{Name}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p style="color:red;"><b>Authors Of The Book:</b>{{authors}}</p>
+          <p style="color:red"><b>Total no. of Characters:</b> {{totalchar}}</p>
+          <p style="color:black"><b>Country:</b>{{country}}</p>
+          <p style="color:red"><b>ISBN:</b> {{isbn}}</p>
+          <p style="color:black"><b>MediaType:</b> {{media}}</p>
+          <p style="color:red"><b>Name of the book:</b> {{Name}}</p>
+          <p style="color:black"><b>Number of Pages:</b> {{Pages}}</p>
+          <p style="color:red"><b>Publisher:</b> {{Publishers}}</p>
+          <p style="color:black"><b>Released Date:</b> {{releasedDate}}</p>
+          
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
